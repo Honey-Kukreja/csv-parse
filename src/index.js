@@ -1,4 +1,4 @@
-// Load environment variables
+
 
 require('dotenv').config();
 require('./config/db'); 
@@ -19,3 +19,10 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+// TEMP TEST: Read & log parsed CSV data
+const { parseCSV } = require('./utils/csvParser');
+const records = parseCSV();
+console.log('Parsed Records Preview:', records.slice(0, 5)); 
+
+
