@@ -4,7 +4,7 @@ require('./config/db');
 const express = require('express');
 const app = express();
 
-// Middleware (helps to read JSON data in requests)
+// Middleware 
 app.use(express.json());
 
 // Default Route
@@ -18,15 +18,15 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
-// TEMP TEST: Read & log parsed CSV data
+
 const { parseCSV } = require('./utils/csvParser');
 
 const records = parseCSV();
-console.log('Parsed Records Preview:', records.slice(0, 5)); 
+//console.log('Parsed Records Preview:', records.slice(0, 5)); 
 const { importUsers, printAgeDistributionFromDB } = require('./services/userService');
 
 importUsers();
-printAgeDistributionFromDB();
+//printAgeDistributionFromDB();
 
 
 

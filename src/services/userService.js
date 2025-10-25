@@ -27,12 +27,12 @@ async function importUsers() {
 
     try {
       await pool.query(query, [fullName, age, address, additionalInfo]);
-      console.log(`Inserted: ${fullName}`);
+     // console.log(`Inserted: ${fullName}`);
     } catch (err) {
       console.error('Error inserting record:', err);
     }
   }
-
+  await printAgeDistributionFromDB();
   console.log('All records processed.');
   
 }
