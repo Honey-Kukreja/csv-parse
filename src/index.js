@@ -26,3 +26,9 @@ const records = parseCSV();
 console.log('Parsed Records Preview:', records.slice(0, 5)); 
 
 
+const { importUsers } = require('./services/userService');
+
+importUsers();
+
+
+
