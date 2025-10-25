@@ -34,6 +34,48 @@ async function importUsers() {
   }
 
   console.log('All records processed.');
+  
 }
 
-module.exports = { importUsers };
+
+
+const p = require('../config/db');
+
+async function  printAgeDistributionFromDB() {
+  try {
+   
+    const result = await p.query('SELECT age FROM users WHERE age IS NOT NULL');
+    const ages = result.rows.map(row => row.age);
+
+    if (ages.length === 0) {
+      console.log('No records found.');
+      return;
+    }
+
+    
+    let groups = {
+      '< 20': 0,
+      '20 to 40': 0,
+      '40 to 60': 0,
+      '> 60': 0
+    };
+
+    for (const age of ages) {
+      if (age < 20) groups['< 20'] += 1;
+      else if (age <= 40) groups['20 to 40'] += 1;
+      else if (age <= 60) groups['40 to 60'] += 1;
+      else groups['> 60'] += 1;
+    }
+
+    
+    console.log('Age-Group       Count');
+    for (const [label, count] of Object.entries(groups)) {
+      console.log(`${label.padEnd(15)} ${count}`);
+    }
+  } catch (err) {
+    console.error('Error calculating grouped age counts:', err);
+  }
+}
+
+module.exports = {importUsers, printAgeDistributionFromDB };
+

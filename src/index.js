@@ -1,5 +1,3 @@
-
-
 require('dotenv').config();
 require('./config/db'); 
 
@@ -22,13 +20,14 @@ app.listen(PORT, () => {
 
 // TEMP TEST: Read & log parsed CSV data
 const { parseCSV } = require('./utils/csvParser');
+
 const records = parseCSV();
 console.log('Parsed Records Preview:', records.slice(0, 5)); 
-
-
-const { importUsers } = require('./services/userService');
+const { importUsers, printAgeDistributionFromDB } = require('./services/userService');
 
 importUsers();
+printAgeDistributionFromDB();
+
 
 
 
